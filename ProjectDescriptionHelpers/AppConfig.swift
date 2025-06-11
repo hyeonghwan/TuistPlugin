@@ -22,38 +22,38 @@ public enum AppConfig {
                     ]
                 ]
             ],
-            "Judge0APIURL": "$(JUDGE0_API_URL)"
         ]
     }
     
     // SWIFT_ACTIVE_COMPILATION_CONDITIONS=
-    public static func projectConfiguration() -> Settings {
+    public static func projectConfiguration(context: ProjectContext) -> Settings {
         .settings(
             configurations:
                 [
-                    .debug(name: BuildConfig.dev.configName, xcconfig: .relativeToXCConfig(type: .dev)),
-                    .release(name: BuildConfig.prod.configName, xcconfig: .relativeToXCConfig(type: .prod))
-                ],
-            defaultSettings: .recommended
-        )
-    }
-    public static func targetConfiguration(path: String) -> Settings {
-        .settings(
-            configurations:
-                [
-                    .debug(name: BuildConfig.dev.configName, xcconfig: .relativeToXCConfig(path: path)),
-                    .release(name: BuildConfig.prod.configName, xcconfig: .relativeToXCConfig(path: path))
+                    .debug(name: BuildConfig.dev.configName, xcconfig: context.pathProvider.xcconfigPath(for: .dev)),
+                    .release(name: BuildConfig.prod.configName, xcconfig: context.pathProvider.xcconfigPath(for: .prod))
                 ],
             defaultSettings: .recommended
         )
     }
     
-    public static func demoProjectConfiguration(path: String) -> Settings {
+    public static func targetConfiguration(name: String, provider: PathProvider) -> Settings {
         .settings(
             configurations:
                 [
-                    .debug(name: BuildConfig.dev.configName, xcconfig: .relativeToXCConfig(path: path)),
-                    .release(name: BuildConfig.prod.configName, xcconfig: .relativeToXCConfig(path: path))
+                    .debug(name: BuildConfig.dev.configName, xcconfig: provider.xcconfigPath(forName: name)),
+                    .release(name: BuildConfig.prod.configName, xcconfig: provider.xcconfigPath(forName: name))
+                ],
+            defaultSettings: .recommended
+        )
+    }
+    
+    public static func demoProjectConfiguration(name: String, provider: PathProvider) -> Settings {
+        .settings(
+            configurations:
+                [
+                    .debug(name: BuildConfig.dev.configName, xcconfig: provider.xcconfigPath(forName: name)),
+                    .release(name: BuildConfig.prod.configName, xcconfig: provider.xcconfigPath(forName: name))
                 ],
             defaultSettings: .recommended
         )

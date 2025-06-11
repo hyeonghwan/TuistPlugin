@@ -8,29 +8,46 @@ public enum BuildConfig: String {
     }
 }
 
-extension Path {
-    public static func relativeToXCConfig(type: BuildConfig) -> Self {
-        return .relativeToRoot("../Codestack/Config/\(type.rawValue.lowercased()).xcconfig")
+public struct ProjectContext {
+    public let metadata: ProjectMetadata
+    public let pathProvider: PathProvider
+    public let deploymentTarget: DeploymentTargets
+    public let defaultSettings: SettingsDictionary
+}
+
+public struct ProjectMetadata {
+    public let orgName: String
+    public let appBundleIDPrefix: String
+}
+
+public struct PathProvider {
+    public let configDirectory: String
+    
+    public func xcconfigPath(for config: BuildConfig) -> Path {
+        .relativeToRoot("\(configDirectory)/\(config.rawValue.lowercased()).xcconfig")
     }
-    public static func relativeToXCConfig(path: String) -> Self {
-        return .relativeToRoot("../Codestack/Config/\(path).xcconfig")
+    
+    public func xcconfigPath(forName name: String) -> Path {
+        .relativeToRoot("\(configDirectory)/\(name).xcconfig")
+    }
+    
+    public func sharedGlobPattern() -> FileElement {
+        .glob(pattern: .relativeToRoot("\(configDirectory)/shared"))
     }
 }
 
 extension Configuration {
-    public static func build(_ type: BuildConfig, name: String = "") -> Self {
-        let buildName = type.rawValue
+    public static func build(_ type: BuildConfig, pathProvider: PathProvider) -> Self {
         switch type {
         case .dev:
             return .debug(
                 name: BuildConfig.dev.configName,
-                xcconfig: .relativeToXCConfig(type: .dev)
+                xcconfig: pathProvider.xcconfigPath(for: .dev)
             )
         case .prod:
             return .release(
                 name: BuildConfig.prod.configName,
-                xcconfig: .relativeToXCConfig(type: .prod)
-            
+                xcconfig: pathProvider.xcconfigPath(for: .prod)
             )
         }
     }

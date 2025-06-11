@@ -5,6 +5,7 @@
 public extension ProjectFactory {
     static func createModule(
         name: String,
+        context: ProjectContext,
         product: Product,
         platform: Platform = .iOS,
         resources: ResourceFileElements? = ["Resources/**"],
@@ -17,7 +18,7 @@ public extension ProjectFactory {
             name: name,
             organizationName: AppConfig.orgName,
             options: .options(automaticSchemesOptions: .disabled),
-            settings: AppConfig.projectConfiguration(),
+            settings: AppConfig.projectConfiguration(context: context),
             targets: [
                 .target(
                     name: name,
@@ -29,7 +30,7 @@ public extension ProjectFactory {
                     sources: ["Sources/**"],
                     resources: resources,
                     dependencies: dependencies,
-                    settings: AppConfig.targetConfiguration(path: name),
+                    settings: AppConfig.targetConfiguration(name: name, provider: context.pathProvider),
                     coreDataModels: coreDataModel
                 ),
                 .target(
@@ -50,7 +51,7 @@ public extension ProjectFactory {
                 .makeScheme(config: .dev, name: name),
                 .makeScheme(config: .prod, name: name)
             ],
-            additionalFiles: [.glob(pattern: .relativeToXCConfig(path: "shared"))]
+            additionalFiles: [context.pathProvider.sharedGlobPattern()]
         )
     }
 }

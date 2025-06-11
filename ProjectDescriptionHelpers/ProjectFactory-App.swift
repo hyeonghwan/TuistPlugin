@@ -6,6 +6,7 @@
 public extension ProjectFactory {
     static func createApp(
         name: String,
+        context: ProjectContext,
         product: Product = .app,
         platform: Platform = .iOS,
         resources: ResourceFileElements? = ["Resources/**"],
@@ -17,7 +18,7 @@ public extension ProjectFactory {
             name: name,
             organizationName: AppConfig.orgName,
             options: .options(automaticSchemesOptions: .disabled),
-            settings: AppConfig.projectConfiguration(),
+            settings: AppConfig.projectConfiguration(context: context),
             targets: [
                 .target(
                     name: name,
@@ -29,7 +30,7 @@ public extension ProjectFactory {
                     sources: ["Sources/**"],
                     resources: resources,
                     dependencies: dependencies,
-                    settings: AppConfig.targetConfiguration(path: name)
+                    settings: AppConfig.targetConfiguration(name: name, provider: PathProvider(configDirectory: configDirectory))
                 ),
                 .target(
                     name: "\(name)Tests",
@@ -43,7 +44,7 @@ public extension ProjectFactory {
                         .target(name: name)
                     ],
                     settings: .settings(base: ["ENABLE_MODULE_VERIFIER": "YES"], configurations: []),
-                    additionalFiles: [.glob(pattern: .relativeToXCConfig(path: "shared"))]
+                    additionalFiles: [ PathProvider(configDirectory: configDirectory).sharedGlobPattern() ]
                 )
             ],
             schemes: [
