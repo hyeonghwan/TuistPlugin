@@ -30,7 +30,7 @@ public extension ProjectFactory {
                     sources: ["Sources/**"],
                     resources: resources,
                     dependencies: dependencies,
-                    settings: AppConfig.targetConfiguration(name: name, provider: PathProvider(configDirectory: configDirectory))
+                    settings: AppConfig.targetConfiguration(name: name, provider: context.pathProvider)
                 ),
                 .target(
                     name: "\(name)Tests",
@@ -44,7 +44,7 @@ public extension ProjectFactory {
                         .target(name: name)
                     ],
                     settings: .settings(base: ["ENABLE_MODULE_VERIFIER": "YES"], configurations: []),
-                    additionalFiles: [ PathProvider(configDirectory: configDirectory).sharedGlobPattern() ]
+                    additionalFiles: [ context.pathProvider.sharedGlobPattern() ]
                 )
             ],
             schemes: [
