@@ -19,7 +19,7 @@ extension Scheme {
             analyzeAction: .analyzeAction(configuration: config.configName)
         )
     }
-
+    
     static func makeDemoScheme(config: BuildConfig = .dev, name: String) -> Scheme {
         Scheme.scheme(
             name: "\(name)Demo-\(config.rawValue)",
@@ -38,5 +38,6 @@ extension Scheme {
             profileAction: .profileAction(configuration: config.configName),
             analyzeAction: .analyzeAction(configuration: config.configName)
         )
-    }}
+    }
+}
 

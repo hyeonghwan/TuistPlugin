@@ -11,12 +11,14 @@ public extension ProjectFactory {
         resources: ResourceFileElements? = ["Resources/**"],
         entitlements: Entitlements? = nil,
         dependencies: [TargetDependency] = [],
+        packages: [Package] = [],
         infoPlist: InfoPlist = .default
     ) -> Project {
         Project(
             name: name,
             organizationName: context.metadata.orgName,
             options: .options(automaticSchemesOptions: .disabled),
+            packages: packages,
             settings: AppConfig.projectConfiguration(context: context),
             targets: [
                 .target(
