@@ -1,6 +1,4 @@
-
 @preconcurrency import ProjectDescription
-
 
 
 public extension ProjectFactory {
@@ -24,8 +22,8 @@ public extension ProjectFactory {
                     name: name,
                     destinations: .iOS,
                     product: .app,
-                    bundleId: AppConfig.appBundleID,
-                    deploymentTargets: AppConfig.deploymentTarget,
+                    bundleId: "\(context.metadata.appBundleIDPrefix).\(name)App",
+                    deploymentTargets: context.deploymentTarget,
                     infoPlist: infoPlist,
                     sources: ["Sources/**"],
                     resources: resources,
@@ -36,8 +34,8 @@ public extension ProjectFactory {
                     name: "\(name)Tests",
                     destinations: .iOS,
                     product: .unitTests,
-                    bundleId: "\(AppConfig.orgName).\(name)Tests",
-                    deploymentTargets: AppConfig.deploymentTarget,
+                    bundleId: "\(context.metadata.appBundleIDPrefix).\(name)Tests",
+                    deploymentTargets: context.deploymentTarget,
                     infoPlist: .default,
                     sources: ["Tests/**"],
                     dependencies: [
