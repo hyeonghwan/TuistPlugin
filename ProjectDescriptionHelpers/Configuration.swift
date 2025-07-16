@@ -13,15 +13,31 @@ public struct ProjectContext {
     public let pathProvider: PathProvider
     public let deploymentTarget: DeploymentTargets
     public let defaultSettings: SettingsDictionary
+    
+    public init(metadata: ProjectMetadata, pathProvider: PathProvider, deploymentTarget: DeploymentTargets, defaultSettings: SettingsDictionary) {
+        self.metadata = metadata
+        self.pathProvider = pathProvider
+        self.deploymentTarget = deploymentTarget
+        self.defaultSettings = defaultSettings
+    }
 }
 
 public struct ProjectMetadata {
     public let orgName: String
     public let appBundleIDPrefix: String
+    
+    public init(orgName: String, appBundleIDPrefix: String) {
+        self.orgName = orgName
+        self.appBundleIDPrefix = appBundleIDPrefix
+    }
 }
 
 public struct PathProvider {
     public let configDirectory: String
+    
+    public init(configDirectory: String) {
+        self.configDirectory = configDirectory
+    }
     
     public func xcconfigPath(for config: BuildConfig) -> Path {
         .relativeToRoot("\(configDirectory)/\(config.rawValue.lowercased()).xcconfig")
