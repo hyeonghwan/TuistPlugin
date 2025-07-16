@@ -48,7 +48,7 @@ public struct PathProvider {
     }
     
     public func sharedGlobPattern() -> FileElement {
-        .glob(pattern: .relativeToRoot("\(configDirectory)/shared"))
+        .glob(pattern: .relativeToRoot("\(configDirectory)/shared.xcconfig"))
     }
 }
 
