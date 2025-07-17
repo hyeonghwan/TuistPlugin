@@ -21,6 +21,10 @@ let app = Template(
             templatePath: .relativeToRoot("\(featurePathToRoot)/Demo/Sources/SceneDelegate.stencil")
         ),
         .file(
+            path: "Projects/{{ name }}/Resources/Main.storyboard",
+            templatePath: .relativeToRoot("\(featurePathToRoot)/Demo/Resources/Main.stencil")
+        ),
+        .file(
             path: "Projects/{{ name }}/Resources/LaunchScreen.storyboard",
             templatePath: .relativeToRoot("\(featurePathToRoot)/Demo/Resources/LaunchScreen.stencil")
         ),
