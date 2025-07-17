@@ -10,7 +10,7 @@ let app = Template(
     items: [
         .file(
             path: "Projects/{{ name }}/Project.swift",
-            templatePath: .relativeToRoot("\(featurePathToRoot)/Project.stencil")
+            templatePath: "Project.stencil"
         ),
         .file(
             path: "Projects/{{ name }}/Sources/AppDelegate.swift",
