@@ -1,1 +1,4 @@
-#include "shared.xcconfig"
+INFOPLIST_KEY_UIMainStoryboardFile=Main
+INFOPLIST_KEY_UILaunchStoryboardName=LaunchScreen
+INFOPLIST_KEY_UILaunchScreen_Generation=YES
+DEVELOPMENT_TEAM=
