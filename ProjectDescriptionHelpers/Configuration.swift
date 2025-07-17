@@ -33,10 +33,12 @@ public struct ProjectMetadata {
 }
 
 public struct PathProvider {
+    public let projectConfigDirectory: String
     public let configDirectory: String
     
-    public init(configDirectory: String) {
+    public init(projectConfigDirectory: String = "", configDirectory: String) {
         self.configDirectory = configDirectory
+        self.projectConfigDirectory = projectConfigDirectory.isEmpty ? configDirectory : projectConfigDirectory
     }
     
     public func xcconfigPath(for config: BuildConfig) -> Path {
