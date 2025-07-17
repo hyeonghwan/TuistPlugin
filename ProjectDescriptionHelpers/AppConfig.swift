@@ -24,8 +24,8 @@ public enum AppConfig {
         .settings(
             configurations:
                 [
-                    .debug(name: BuildConfig.dev.configName, xcconfig: context.pathProvider.xcconfigPath(for: .dev)),
-                    .release(name: BuildConfig.prod.configName, xcconfig: context.pathProvider.xcconfigPath(for: .prod))
+                    .debug(name: BuildConfig.dev.configName, xcconfig: context.pathProvider.projectConfigPath(for: .dev)),
+                    .release(name: BuildConfig.prod.configName, xcconfig: context.pathProvider.projectConfigPath(for: .prod))
                 ],
             defaultSettings: .recommended
         )

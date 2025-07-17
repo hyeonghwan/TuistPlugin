@@ -41,6 +41,10 @@ public struct PathProvider {
         self.projectConfigDirectory = projectConfigDirectory.isEmpty ? configDirectory : projectConfigDirectory
     }
     
+    public func projectConfigPath(for config: BuildConfig) -> Path {
+        .relativeToRoot("\(projectConfigDirectory)/\(config.rawValue.lowercased()).xcconfig")
+    }
+    
     public func xcconfigPath(for config: BuildConfig) -> Path {
         .relativeToRoot("\(configDirectory)/\(config.rawValue.lowercased()).xcconfig")
     }
