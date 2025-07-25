@@ -32,6 +32,7 @@ public struct ProjectMetadata {
     }
 }
 
+
 public struct PathProvider {
     public let projectConfigDirectory: String
     public let configDirectory: String
@@ -42,7 +43,7 @@ public struct PathProvider {
     }
     
     public func projectConfigPath(for config: BuildConfig) -> Path {
-        .relativeToRoot("\(projectConfigDirectory)/\(config.rawValue.lowercased()).xcconfig")
+        .relativeToRoot("\(configDirectory)/\(config.rawValue.lowercased()).xcconfig")
     }
     
     public func xcconfigPath(for config: BuildConfig) -> Path {
@@ -50,7 +51,7 @@ public struct PathProvider {
     }
     
     public func xcconfigPath(forName name: String) -> Path {
-        .relativeToRoot("\(configDirectory)/\(name).xcconfig")
+        .relativeToRoot("\(projectConfigDirectory)/\(name).xcconfig")
     }
     
     public func sharedGlobPattern() -> FileElement {
