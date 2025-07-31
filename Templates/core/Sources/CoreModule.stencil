@@ -1,0 +1,7 @@
+import Foudnation
+
+struct CoreModule {
+    func hello() {
+        print("hello world")
+    }
+}

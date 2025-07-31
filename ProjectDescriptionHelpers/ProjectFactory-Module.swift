@@ -1,6 +1,4 @@
-
 @preconcurrency import ProjectDescription
-
 
 public extension ProjectFactory {
     static func createModule(

@@ -1,7 +1,5 @@
 @preconcurrency import ProjectDescription
 
-
-
 public extension ProjectFactory {
     static func createModuleWithDemo(
         name: String,

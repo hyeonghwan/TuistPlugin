@@ -1,6 +1,5 @@
 @preconcurrency import ProjectDescription
 
-
 public extension ProjectFactory {
     static func createApp(
         name: String,
