@@ -1,5 +1,7 @@
 @preconcurrency import ProjectDescription
 
+let featurePathToRoot = "Templates/feature"
+
 let app_code = Template(
     description: "UIKit App-code Template",
     attributes: [
