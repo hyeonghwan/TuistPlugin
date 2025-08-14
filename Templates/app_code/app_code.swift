@@ -1,9 +1,7 @@
 @preconcurrency import ProjectDescription
 
-let featurePathToRoot = "Templates/feature"
-
-let app_story = Template(
-    description: "UIKit App-story Template",
+let app_code = Template(
+    description: "UIKit App-code Template",
     attributes: [
         .required("name")
     ],
@@ -13,16 +11,12 @@ let app_story = Template(
             templatePath: "Project.stencil"
         ),
         .file(
-            path: "Projects/{{ name }}/Sources/AppDelegate.swift",
+            path: "Projects/{{ name }}/Sources/App/AppDelegate.swift",
             templatePath: .relativeToRoot("\(featurePathToRoot)/Demo/Sources/AppDelegate.stencil")
         ),
         .file(
-            path: "Projects/{{ name }}/Sources/SceneDelegate.swift",
+            path: "Projects/{{ name }}/Sources/App/SceneDelegate.swift",
             templatePath: .relativeToRoot("\(featurePathToRoot)/Demo/Sources/SceneDelegate.stencil")
-        ),
-        .file(
-            path: "Projects/{{ name }}/Resources/Main.storyboard",
-            templatePath: .relativeToRoot("\(featurePathToRoot)/Demo/Resources/Main.stencil")
         ),
         .file(
             path: "Projects/{{ name }}/Resources/LaunchScreen.storyboard",
@@ -38,7 +32,8 @@ let app_story = Template(
         ),
         .file(
             path: "Projects/{{ name }}/Config/{{ name }}.xcconfig",
-            templatePath: .relativeToRoot("\(featurePathToRoot)/Config/config.stencil")
+            templatePath: .relativeToRoot("Templates/app_code/Config/config.stencil")
         )
     ]
 )
+
