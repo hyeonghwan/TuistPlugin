@@ -6,6 +6,7 @@ public extension ProjectFactory {
         context: ProjectContext,
         product: Product = .app,
         platform: Platform = .iOS,
+        destination: Destinations = [.iPhone],
         resources: ResourceFileElements? = ["Resources/**"],
         entitlements: Entitlements? = nil,
         dependencies: [TargetDependency] = [],

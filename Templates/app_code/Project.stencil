@@ -20,6 +20,6 @@ let project = ProjectFactory.createApp(
     ],
     packages: [
     ],
-    infoPlist: .storyBoardDefault
+    infoPlist: .codeDefaultWith(extra: [:])
 )
 
