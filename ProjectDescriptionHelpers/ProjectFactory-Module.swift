@@ -5,7 +5,7 @@ public extension ProjectFactory {
         name: String,
         context: ProjectContext,
         product: Product,
-        platform: Platform = .iOS,
+        destination: Destinations = [.iPhone],
         resources: ResourceFileElements? = ["Resources/**"],
         entitlements: Entitlements? = nil,
         dependencies: [TargetDependency] = [],
@@ -22,7 +22,7 @@ public extension ProjectFactory {
             targets: [
                 .target(
                     name: name,
-                    destinations: .iOS,
+                    destinations: destination,
                     product: product,
                     bundleId: "\(context.metadata.appBundleIDPrefix).\(name)Module",
                     deploymentTargets: context.deploymentTarget,
@@ -35,7 +35,7 @@ public extension ProjectFactory {
                 ),
                 .target(
                     name: "\(name)Tests",
-                    destinations: .iOS,
+                    destinations: destination,
                     product: .unitTests,
                     bundleId: "\(context.metadata.appBundleIDPrefix).\(name)Tests",
                     deploymentTargets: context.deploymentTarget,
