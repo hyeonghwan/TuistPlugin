@@ -2,7 +2,7 @@
 
 let featurePathToRoot = "Templates/feature"
 
-let app = Template(
+let app_story = Template(
     description: "UIKit App Template",
     attributes: [
         .required("name")
